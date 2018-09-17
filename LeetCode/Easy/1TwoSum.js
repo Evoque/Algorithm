@@ -152,9 +152,15 @@ var V2_R1 = function(nums, target) {
     return result;  
 };
 
-var array = [3, 3];
-var target = 6;
+// var array = [3, 3];
+// var target = 6;
 
-var result = V2_R1(array, target);
-console.log(result);
+// var result = V2_R1(array, target);
+// console.log(result);
 
+
+
+/**
+ *  最后，实现仅遍历一遍的终极版本 one-pass
+ *  下面代码是用 `C#` 写的，在`1TwoSum.cs`中，逻辑想通；直接翻译成 `Javascript`即可。
+ */
