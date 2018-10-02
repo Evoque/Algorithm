@@ -58,7 +58,7 @@ function longestCommonPrefix(strs){
 
 
 
-### Version Two
+### Version Two: Horizontal scanning
 
 有一组字符，记作:`LCP(S1, ...., Sn)`, 遍历方式为: `LCP(LCP(LCP(S1, S2), S3),....., Sn)`
 
@@ -90,8 +90,38 @@ function longestCommonPrefix(strs){
 
 **效率分析：**
 
-- 时间复杂度：O(n2)
-- 空间复杂度：O(1);
+- 时间复杂度：O(n*m), n 为数组的个数，m为字符串的长度。
+- 空间复杂度：O(1), only used constant extra space.
+
+
+
+> 上面 v2有个知名缺陷， 极端情况：当前`n-1`个字符串都相等， 但最后一项只有一个字符时，前面所有的比较都是无用的，所以为了解决这种情况采用单字符逐个比较，也就回到了刚开始想的第一种解法， 有人或许会问，逐字符的对比与`indexOf`对比性能差异如何， 个人认为`indexOf`根本上也是住个字符进行对比的， 性能来说应该是一样。 所以有了下面的版本三。
+
+
+
+### Version Three: Vertical scanning.
+
+```javascript
+function longestCommonPrefix(strs){
+    if(!strs || strs.length === 0) return '';
+    var result = '', finish = false;
+    for(let i=0; i<strs[0].length; i++){
+        if(finish) break;
+        var c = strs[0][i];
+        for(let j=1; j<strs.length; j++){
+            if(i === strs[j].length || strs[j][i] !== c){
+                result = strs[0].substring(0, i);
+                finish = true;
+                break;
+            }
+        }
+    }
+    
+    return result;
+}
+```
+
+
 
 
 
