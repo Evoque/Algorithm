@@ -73,7 +73,7 @@ public bool IsPalindrome(int x) {
 仅反转一般也防止了溢出的情况。 最后分析一下时间和空间复杂度：
 
 1. 时间复杂度(Time Complexity): 因为`x`的遍历是以除以`10`为基础而不是递增遍历，所以时间复杂度为`O(log10(n))`
-2. 空间复杂度(Space Complexity): 仅用到了一个局部变量`revertNum`, 所以为O(1);
+2. 空间复杂度(Space Complexity): 仅用到了一个局部变量`revertNum`, 所以为O
 
 
 
