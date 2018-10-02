@@ -52,6 +52,30 @@ var romanToInt = function(s) {
 
 
 
+精简一下， 取消中间变量，得到下面代码：
+
+```javascript
+var romanToInt = function(s) { 
+    var romToIntObj = { I:1, V:5, X:10, L:50, C:100, D:500, M:1000 };
+    
+    // 因为每次都是两个符号之间的对比，所以最后一个符号没有进行计算。
+    var result = romToIntObj[s[s.length-1]];
+    for(let i=0; i < s.length-1; i++){ 
+        let itemVal = romToIntObj[s[i]];
+        if(itemVal < romToIntObj[s[i+1]]){
+            result -= itemVal;
+        } else {
+            result += itemVal;
+        }
+    }
+    return result;
+};
+```
+
+
+
+上面的解题思路是从左到右遍历， 也可以从右到左遍历。因为默认是左边的比右边的合要大，所以可以和每次的`result`进行比较，只要`<`就减去，`>=`就相加；是解题的另一种思路。
+
 
 
 
