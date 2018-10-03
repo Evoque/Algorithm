@@ -123,6 +123,73 @@ function longestCommonPrefix(strs){
 
 
 
+上面这种方法和第一种类似，只不过实现的更精妙。
+
+
+
+OK，来点高难度的
+
+### Version Four: Divide and conquer
+
+原理: 递归对数组进行折半拆分
+
+
+
+```javascript
+function longestCommonPrefix(strs){
+    if(!strs || strs.length === 0) return '';
+    
+    return divideAndConquerCommonStr(strs, 0, strs.length - 1);
+}
+
+function divideAndConquerCommonStr(strs, l, r){
+    if(l === r) return strs[l];
+    else {
+        var mid = (l + r)/2;
+    	var lcpLeft = divideAndConquerCommonStr(strs, l, mid);
+    	var lcpRight = divideAndConquerCommonStr(strs, mid+1, r);
+        return commonPrefix(lcpLeft, lcpRight);
+    }  
+}
+
+function commonPrefix(left, right){
+    var minLen = Math.min(left.length, right.length);
+    var result = left.substring(0, min);
+    
+    for(let i=0; i<minLen; i++){
+        if(left[i] !== right[i]){
+            result = left.substring(0, i);
+            break;
+        }
+    }
+    return result;
+}
+
+```
+
+
+
+- 时间复杂度：worst: 2·T(n/2) + O(m), best: O(minLen · n)
+- 空间复杂度：有`log(n)`次的递归， 每次递归都需要字符串存储，所以空间复杂度为`O(m·log(n))`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
