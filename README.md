@@ -10,3 +10,10 @@ I hope I can finish this is in one years.
 
 > I will use Javascript & C# first, maybe python & go later.
 
+
+
+
+
+### Not fully understand
+
+- `Easy` - `14LongestCommonPrefix` - `Version Four's Time complexity & space complexity`

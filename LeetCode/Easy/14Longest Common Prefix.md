@@ -180,6 +180,55 @@ function commonPrefix(left, right){
 
 
 
+### Version Five: Binary Search
+
+```javascript
+
+function longestCommonPrefix(strs){
+    if(!strs || strs.length ===0) return '';
+    var minLen = Number.MAX_VALUE;
+    strs.forEach(str => minLen = Math.min(minLen, str.length));
+    
+    var low=1, high=minLen;
+    while(low <= high){
+        var middle = (low + high)/2;
+        if(isCommonPrefix(strs, middle)) low = middle + 1;
+        else high = middle - 1;
+    }
+    return strs[0].substring(0, (low+high)/2);
+}
+
+function isCommonPrefix(strs, len){
+    var str1 = strs[0].substring(0, len);
+    var result = true;
+    for(let i=1;i<strs.length; i++){
+        if(strs[i].indexOf(str1) !== 0){
+            result = false;
+            break;
+        }
+    }
+    return result;
+}
+
+```
+
+这个算法的思想：
+
+1. 找到`common prefix`的最大长度字符串，也就是数组中最短的字符串；
+2. 然后对这个字符串进行折半拆分；
+3. 如果左半部分匹配，再次拆分右半部分；
+4. 如果左半部分不匹配，再次拆分左半部分；
+5. 循环第三步，得到上述代码；
+
+
+
+#### 性能分析
+
+- 时间复杂度：O(S·log(n)), S=m*n, log(n)是字符串二分迭代的次数。
+- 空间复杂度：O(1)
+
+
+
 
 
 
