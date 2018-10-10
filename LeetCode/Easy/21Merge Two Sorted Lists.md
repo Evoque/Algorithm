@@ -103,6 +103,36 @@ var mergeTwoLists = function(l1, l2){
 3. 代码最后的精华为 `cur.next = l1 || l2`, 理解这点就完全理解ListNode的精髓。
 4. 开放自己的编程思维。
 
+----
+
+之后用`C#`同样实现了一遍， 但是发现仅击败了`97.02%`的解决方案；
+下面这个是其他提交者递归版本的解决方案：
+```C#
+
+public class Solution {
+    public ListNode MergeTwoLists(ListNode l1, ListNode l2) {
+        if(l1 == null) return l2;
+        if(l2 == null) return l1;
+        
+        ListNode result;
+        if(l1.val <= l2.val){
+            result = l1;
+            result.next = MergeTwoLists(l1.next, l2);
+        } else {
+            result = l2;
+            result.next = MergeTwoLists(l1, l2.next);
+        }
+        
+        return result;
+    }
+}
+
+
+```
+
+可以看出，用递归的思路还是很精妙的；不禁感慨， 许多问题没有最好的解决方案， 只有更好。
+上面代码相对于正常思路的遍历更精炼，代码量更少。 
+
 
 
 
