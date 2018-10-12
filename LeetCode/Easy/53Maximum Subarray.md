@@ -55,9 +55,9 @@ var maxSubArray = function(nums) {
             }
         }
     }  
-    return nums.slice(maxI, maxJ + 1);
+    return maxVal;
 };
 
 ```
 
-运行之后，简单的测试用例可以通过， 但是`Submit Solution`的批量测试未通过，也未说明原因。 
+> 边界条件未健全： [1], [-2,1] 等情况
