@@ -18,7 +18,7 @@ The count-and-say sequence is the sequence of integers with the first five terms
 
 `11` is read off as `'two 1s'` or `21`.
 
-`21` is read off as `'one 2'`, then `'one 1'` or `1211`.
+`21` is read off as `'one 2'`, ~~then~~ `'one 1'` or `1211`.
 
 
 
@@ -39,9 +39,15 @@ The count-and-say sequence is the sequence of integers with the first five terms
 ```javascript
 var countAndSay = function(n) { 
     let result = '1', counter = 1; 
-
+    
+    /* 因初始化时result为'1', 所以第一次读是从1开始读， 也就是获得的是2的读数，n-1才是执行的结果，因此不需要等号 */
     while(counter < n) {
         
+        /*
+        *    初始化的`subCounter`和下面①中重置的`subCounter`值不同，
+        *  因为初始化时还为与`result`中的char进行比对；
+        *  而重置时则是已经进行比对的结果，即重置其实是个复合操作: `subCounter=0; subCounter++;` => `subCounter=1;`
+        */
         let subCounter=0; 
         let sub = result[0];
         let curResult = '';
@@ -50,12 +56,16 @@ var countAndSay = function(n) {
             if(result[i] === sub) subCounter++;
             else {
                 curResult += subCounter + sub;
+                /* ① */
                 subCounter=1;
                 sub=result[i];
             }
 
-            if(i === result.length-1) curResult += subCounter + sub;
-            
+            /* 
+            * 上面的判断逻辑是`知道下一个char`的结果再判断后续操作(判断是否还有重复项)， 
+            * 所以当i为最后一个元素的边界条件要分类讨论 
+            */
+            if(i === result.length-1) curResult += subCounter + sub; 
         }
         result = curResult;
         counter++;
@@ -66,6 +76,14 @@ var countAndSay = function(n) {
 };
 ```
 
+
+OK, 下面反思一下遇到的问题和收获：
+### 总结：
+1. 题目的理解能力 其实好好理解说明信息中的第三条,
+   ` `21` is read off as `'one 2'`, then `'one 1'` or `1211`. ` 就能明白题目的含义，主要还是英文的阅读能力， `'one 2'` 和 `'one 1'`之间多了一个then，原本连贯的意思`'one 2 one 1'`却被自己给分开解读了。
+2. 算法细节上的思考：已在算法备注中说明
+
+> 算法虽然简单，但在迅速的`理解题意`及`边界条件的考虑`上仍发现了自己的不足， 算是微小的进步吧。 挺好。
 
 
 
