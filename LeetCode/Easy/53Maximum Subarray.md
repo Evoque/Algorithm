@@ -74,9 +74,48 @@ var maxSubArray = function(nums) {
 
 
 
+上面的解决方案明显有问题。就算运行没问题，其复杂度也是无法忍受的。 
 
 
 
+通过参考答案，得到解决方案2
+
+### Version 2
+
+这个算法在Jon Bentley的论文中有过讨论(Sep. 1984 Vol. 27 No. 9 Communications of the ACM P885), 思想如下:
+
+The maximum is initially A[0]. Suppose we've solved the problem for A[1 .. i - 1]; how can we extend that to A[1 .. i]? The maximum
+sum in the first I elements is either the maximum sum in the first i - 1 elements (which we'll call MaxSoFar), or it is that of a subvector that ends in position i (which we'll call MaxEndingHere).
+
+MaxEndingHere is either A[i] plus the previous MaxEndingHere, or just A[i], whichever is larger.
+
+1. 最大子数组之和的起始值为`A[0]`, 假设我们已经找出`A[1 .. i-1]` 的最大子数组之和，即`MaxSoFar`;
+2. 那么
+
+得到极其精简的代码：
+
+```javascript
+var maxSubArray = function(nums) {
+    let maxSoFar=nums[0], maxEndingHere=nums[0];
+    for (let i=1;i<nums.length;++i){
+    	maxEndingHere= Math.max(maxEndingHere+nums[i],nums[i]);
+    	maxSoFar=Math.max(maxSoFar, maxEndingHere);	
+    }
+    return maxSoFar;
+};
+```
+
+
+
+上面代码运用的思想是`Dynamic Programming`，不能完全理解`maxEndingHere`的原理， 所以先滚去看`Dynamic Programming` 再回头做这一题。
+
+
+
+## 总结
+
+1. 稍微复杂一点的算法，按照现有的惯性思维(遍历、递归等)得到的解决方案不一定是最好的，或者根本就是错的；
+2. 如果能为一个算法找到匹配的数学原理，那这个算法往往是健壮的，性能高的。
+3. **归纳总结**是解决算法的一个重要方法。
 
 
 
