@@ -23,6 +23,8 @@ var maxSubArray = function(nums) {
 
     // idxs 中任意两个index取，subarray
     let maxVal = 0, maxI = 0, maxJ = 0;
+
+    if(idxs.length === 1)
     for (let i = 0; i < idxs.length; i++) {
         for (let j = i + 1; j < idxs.length; j++) {
             const subArr = nums.slice(idxs[i], idxs[j] + 1);
