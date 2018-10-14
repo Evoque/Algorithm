@@ -56,10 +56,27 @@ function top_down_normal(n) {
     return val;
 }
 
+// [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].forEach(i => {
+//     const result = top_down_normal(i);
+//     console.log(result);
+// });
+
+
+function splitNum(n) { 
+    let result = [[n]];
+    for (let i = 1; i < n; i++) { 
+        var subRes = splitNum(n - i);
+        result.push([1, ...subRes]);
+    }
+    return result;
+}
+
 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].forEach(i => {
-    const result = top_down_normal(i);
-    console.log(result);
+    const result = splitNum(i);
+    console.dir(result.toString());
+
 });
+
 
 
 /**
