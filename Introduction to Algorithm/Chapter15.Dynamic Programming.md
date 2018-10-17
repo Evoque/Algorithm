@@ -102,9 +102,24 @@ $$
 >
 > 是否可以通过这种形式描述所有的切割方案？  Not Understand Evoque
 
+上面解法称为: **自顶向下递归实现**，代码如下:
+
+```javascript
+function CUT_ROD(p, n){
+    if(n === 0) return 0;
+    let q = -Number.MAX_VALUE;
+    for(let i=1; i<=n; i++){
+        q = max(q, p[i] + CUT_ROD(p, n-i));
+    }
+    return q;
+}
+```
 
 
-	
+
+**为什么上面两个实现方式的效率都比较差？**
+
+`CUT_ROD(p, n)`对$i$=1,2,...,n 调用 `CUT_ROT(p, n-i)`, 等价于对$j=0,1,..., n-1$调用`CUT-ROD(p, j)`, 当这个过程递归展开时，它的工作量是个树。
 
 
 
